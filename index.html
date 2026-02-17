@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Safety Workshop for Seniors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+        }
+
+        .nav-btn.active {
+            background: #764ba2;
+            box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+        }
+
+        .content {
+            padding: 40px;
+            min-height: 500px;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tip-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .scenario {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 2px solid #2196F3;
+        }
+
+        .scenario-title {
+            color: #1976D2;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .red-flag {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .red-flag li:before {
+            content: "🚩 ";
+            margin-right: 10px;
+        }
+
+        .interactive-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        .interactive-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        strong {
+            color: #764ba2;
+        }
+
+        .key-point {
+            font-size: 1.2em;
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .answer-box {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 8px;
+            border-left: 5px solid #28a745;
+        }
+
+        .exercise-card {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .exercise-scenario {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .choice-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .choice-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 25px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .choice-btn:hover {
+            background: #f0f7ff;
+            transform: translateY(-2px);
+        }
+
+        .choice-btn.correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .choice-btn.incorrect {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation.correct {
+            display: block;
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+        }
+
+        .explanation.incorrect {
+            display: block;
+            background: #f8d7da;
+            border-left: 5px solid #dc3545;
+        }
+
+        .clue-list {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .clue-list ul {
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Staying Safe in the Digital Age</h1>
+            <p>A Practical Guide to Modern Scams and Security</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" data-slide="0">Introduction</button>
+            <button class="nav-btn" data-slide="1">AI Voice Scams</button>
+            <button class="nav-btn" data-slide="2">Video Deepfakes</button>
+            <button class="nav-btn" data-slide="3">Deepfake Exercise</button>
+            <button class="nav-btn" data-slide="4">Email & Text Scams</button>
+            <button class="nav-btn" data-slide="5">Password Safety</button>
+            <button class="nav-btn" data-slide="6">Quick Quiz</button>
+            <button class="nav-btn" data-slide="7">Action Plan</button>
+        </div>
+
+        <div class="content">
+            <!-- Slide 1: Introduction -->
+            <div class="slide active">
+                <h2>Welcome to Digital Safety!</h2>
+                
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 25px 0;">
+                    <h3 style="color: white; margin-top: 0; font-size: 1.8em;">Presented by Our Futures Past</h3>
+                    <p style="font-size: 1.15em; line-height: 1.8; margin: 15px 0; color: white;">
+                        <strong style="color: white;">Our Mission:</strong> To serve the human dignity of senior citizens across the United States by providing creative activities and events that improve and extend their physical, emotional, and mental well-being.
+                    </p>
+                    <p style="font-size: 1.1em; line-height: 1.8; margin: 15px 0; color: white;">
+                        We believe in organizing fun and unique events that bring generations together, connecting younger volunteers with senior citizens to create meaningful experiences and build stronger communities.
+                    </p>
+                    <p style="font-size: 1.05em; line-height: 1.6; margin: 15px 0; font-style: italic; opacity: 0.95; color: white;">
+                        Learn more at: <strong style="color: white;">ourfuturespast.org</strong> | <strong style="color: white;">virtualtechmentor.com</strong>
+                    </p>
+                </div>
+
+                <div style="background: #f0f7ff; padding: 25px; border-radius: 15px; margin: 25px 0; border-left: 5px solid #667eea;">
+                    <h3 style="color: #667eea; margin-top: 0; font-size: 1.6em;">Your Workshop Facilitator: Jordan Derby</h3>
+                    <p style="font-size: 1.15em; line-height: 1.8; margin: 15px 0;">
+                        <strong>Founder of Our Futures Past</strong> and cybersecurity professional with nearly 17 years of experience securing systems for the Department of Defense. Jordan created Our Futures Past and Virtual Tech Mentor to bridge the digital divide and empower seniors with the knowledge and skills to safely navigate technology.
+                    </p>
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <p style="font-size: 1.1em; margin: 10px 0;"><strong>🛡️ Cybersecurity Expertise:</strong> With years of experience navigating complex security policies and mitigating threats at the highest levels, Jordan specializes in breaking down technical concepts into actionable guidance. Whether it's identifying phishing attempts, recognizing phone scams, or spotting AI-driven fraud, you'll learn from someone who knows how attackers think.</p>
+                        
+                        <p style="font-size: 1.1em; margin: 10px 0;"><strong>💬 Clear Communication:</strong> Jordan has a proven track record of communicating risks and security strategies to non-technical audiences. This workshop is designed to be accessible and empowering, not overwhelming. No question is too simple!</p>
+                        
+                        <p style="font-size: 1.1em; margin: 10px 0;"><strong>🔧 Hands-On IT Support:</strong> From managing large-scale cloud migrations to overseeing system operations, Jordan has the practical skills to help you troubleshoot devices, set up secure accounts, and optimize your technology experience.</p>
+                    </div>
+                    <p style="font-size: 1.1em; line-height: 1.8; margin: 10px 0;">
+                        <strong>Why This Workshop Matters:</strong> Scammers are increasingly using advanced AI tools to trick people, but knowledge is power. Today, you'll learn practical skills to recognize and avoid these scams, protect your information, and stay connected safely with family and friends.
+                    </p>
+                </div>
+                
+                <p style="font-size: 1.2em; line-height: 1.8; margin: 20px 0;">
+                    Technology is wonderful, but scammers are using new AI tools to trick people. The good news? Once you know what to look for, these scams are easy to spot and avoid.
+                </p>
+
+                <h3>What We'll Cover Today:</h3>
+                <ul>
+                    <li><strong>AI Voice Cloning:</strong> Scammers who sound exactly like your loved ones</li>
+                    <li><strong>Deepfake Videos:</strong> Fake videos that look completely real</li>
+                    <li><strong>Modern Email & Text Scams:</strong> Getting trickier every day</li>
+                    <li><strong>Password Protection:</strong> Keeping your accounts safe</li>
+                    <li><strong>Practical Steps:</strong> What to do right now to protect yourself</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>Remember:</strong> If something feels wrong, it probably is. Trust your instincts! This is a safe space to ask questions and learn together.
+                </div>
+            </div>
+
+            <!-- Slide 2: AI Voice Scams -->
+            <div class="slide">
+                <h2>🎤 AI Voice Cloning Scams</h2>
+
+                <div class="key-point">
+                    <strong>What It Is:</strong> Scammers can now copy someone's voice using just a few seconds of audio from social media, voicemails, or videos. They use this fake voice to call you pretending to be someone you know.
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">📞 Real-Life Scenario: The Grandparent Scam 2.0</div>
+                    <p><strong>What Happens:</strong></p>
+                    <p style="margin: 15px 0; line-height: 1.8;">
+                        You receive a call. It sounds EXACTLY like your grandson. He's crying and says: "Grandma, I've been in a car accident. I'm so scared. The police are here. I need $5,000 for bail right now. Please don't tell Mom and Dad, I'm so embarrassed. Can you wire the money?"
+                    </p>
+                    <p><strong>The voice sounds perfect. The emotion seems real. But it's a scam.</strong></p>
+                </div>
+
+                <h3>🚩 Warning Signs:</h3>
+                <ul class="red-flag">
+                    <li>Urgent requests for money, especially through wire transfer, gift cards, or cryptocurrency</li>
+                    <li>Asking you to keep it secret from other family members</li>
+                    <li>Pressure to act immediately without time to think</li>
+                    <li>Unusual payment methods (gift cards, wire transfers, cash apps)</li>
+                    <li>They won't let you call them back on their regular number</li>
+                </ul>
+
+                <h3>✅ How to Protect Yourself:</h3>
+                <div class="tip-box">
+                    <ul class="checklist">
+                        <li><strong>Create a Family Code Word:</strong> Agree on a secret word or phrase with family members that only you know. Ask for it if someone calls asking for money.</li>
+                        <li><strong>Hang Up and Call Back:</strong> Always hang up and call the person directly using a number you already have saved.</li>
+                        <li><strong>Verify Through Another Family Member:</strong> Call another relative to check if the emergency is real.</li>
+                        <li><strong>Never Rush:</strong> Real emergencies can wait 10 minutes for you to verify. Scammers will pressure you to act NOW.</li>
+                        <li><strong>Ask Specific Questions:</strong> Ask something only the real person would know (pet's name, last place you visited together).</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Interactive Discussion:</strong> Has anyone here received a suspicious call from someone claiming to be a family member? What made you suspicious? (Allow time for sharing experiences)
+                </div>
+            </div>
+
+            <!-- Slide 3: Video Deepfakes -->
+            <div class="slide">
+                <h2>🎥 Deepfake Video Scams</h2>
+
+                <div class="key-point">
+                    <strong>What It Is:</strong> AI can now create videos of people saying or doing things they never did. These "deepfakes" look incredibly realistic and are being used to trick people.
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">📱 Real-Life Scenario: The CEO Video Call</div>
+                    <p style="margin: 15px 0; line-height: 1.8;">
+                        You receive a video call that appears to be from your bank manager or a company CEO. They look and sound exactly right. They say there's been suspicious activity on your account and they need you to verify your information immediately by providing your account number and password.
+                    </p>
+                    <p><strong>The video is fake, created by AI. Your real bank would NEVER ask for passwords.</strong></p>
+                </div>
+
+                <h3>Common Deepfake Scams:</h3>
+                <ul>
+                    <li><strong>Fake Celebrity Endorsements:</strong> Videos of celebrities promoting investments or products they've never heard of</li>
+                    <li><strong>Impersonation Scams:</strong> Someone pretending to be a government official, police officer, or company executive</li>
+                    <li><strong>Romance Scams:</strong> Creating fake video calls to build trust before asking for money</li>
+                    <li><strong>Investment Scams:</strong> Fake financial experts giving "insider tips"</li>
+                </ul>
+
+                <h3>🚩 Signs It Might Be a Deepfake:</h3>
+                <ul class="red-flag">
+                    <li>Slight blurriness or odd lighting around the face</li>
+                    <li>Unnatural eye movements or blinking</li>
+                    <li>Audio doesn't quite match lip movements</li>
+                    <li>Jerky or glitchy movements when they turn their head</li>
+                    <li>Unusual shadows or reflections</li>
+                    <li>Background looks slightly off or blurred</li>
+                </ul>
+
+                <h3>✅ How to Protect Yourself:</h3>
+                <div class="tip-box">
+                    <ul class="checklist">
+                        <li><strong>Be Skeptical of Video Calls from Unknown Numbers:</strong> Just because you can see someone doesn't mean they're real.</li>
+                        <li><strong>Verify Independently:</strong> Hang up and contact the person or organization through official channels.</li>
+                        <li><strong>Never Share Sensitive Information on Video Calls:</strong> No legitimate organization will ask for passwords, PINs, or full account numbers.</li>
+                        <li><strong>Watch for Pressure Tactics:</strong> Scammers create urgency. Real businesses give you time to verify.</li>
+                        <li><strong>Check Official Sources:</strong> If a celebrity is endorsing something, check their verified social media accounts.</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <strong>Group Activity:</strong> Let's practice! If you received a video call from someone claiming to be from your bank asking you to confirm your account details, what would you do? (Discuss responses)
+                </div>
+            </div>
+
+            <!-- Slide 4: Deepfake Detection Exercise -->
+            <div class="slide">
+                <h2>🔍 Deepfake Detection Exercise</h2>
+                <p style="font-size: 1.2em; margin-bottom: 25px;">
+                    Let's practice! Read each scenario carefully and decide: Is this likely a DEEPFAKE or REAL? Click your answer to see if you're right!
+                </p>
+
+                <!-- Exercise 1 -->
+                <div class="exercise-card">
+                    <h3 style="color: #667eea; margin-top: 0;">Exercise 1: The Video Call from Your Bank</h3>
+                    <div class="exercise-scenario">
+                        <strong>The Situation:</strong>
+                        <p style="margin: 10px 0;">
+                            You receive a video call on your phone from someone who says they're from your bank's fraud department. You can see them clearly - they're wearing a suit and sitting in what looks like an office. They show you an ID badge. They say there's been suspicious activity on your account and they need to verify your identity by having you read out your account number and the 3-digit code on the back of your card.
+                        </p>
+                        <div class="clue-list">
+                            <strong>🔍 Look for these clues:</strong>
+                            <ul>
+                                <li>What are they asking for?</li>
+                                <li>How did they contact you?</li>
+                                <li>What's the urgency level?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-exercise="1" data-answer="real">REAL</button>
+                        <button class="choice-btn" data-exercise="1" data-answer="fake">DEEPFAKE SCAM</button>
+                    </div>
+                    <div class="explanation" id="explanation1">
+                        <strong>✅ CORRECT! This is a DEEPFAKE SCAM</strong>
+                        <p style="margin-top: 10px;">
+                            <strong>Why:</strong> Your real bank will NEVER call you and ask for your full account number, card number, or security code - even on a video call. The professional appearance, office setting, and ID badge can all be faked or created with AI. The video of the "banker" could be a deepfake, or it could be a real person pretending to be from your bank. Either way, it's a scam!
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>What to do:</strong> Hang up immediately and call your bank using the number on the back of your card or from their official website.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Exercise 2 -->
+                <div class="exercise-card">
+                    <h3 style="color: #667eea; margin-top: 0;">Exercise 2: Celebrity Investment Video</h3>
+                    <div class="exercise-scenario">
+                        <strong>The Situation:</strong>
+                        <p style="margin: 10px 0;">
+                            You see a video on Facebook showing Tom Hanks talking about an "amazing investment opportunity" in cryptocurrency. He says he's made millions and you can too. The video looks professional, and it really looks and sounds like him. At the end, there's a link to "invest now" with a limited-time offer. You've never heard Tom Hanks talk about cryptocurrency before.
+                        </p>
+                        <div class="clue-list">
+                            <strong>🔍 Look for these clues:</strong>
+                            <ul>
+                                <li>Is this typical content for this celebrity?</li>
+                                <li>Where did you find this video?</li>
+                                <li>Is there a financial ask?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-exercise="2" data-answer="real">REAL</button>
+                        <button class="choice-btn" data-exercise="2" data-answer="fake">DEEPFAKE SCAM</button>
+                    </div>
+                    <div class="explanation" id="explanation2">
+                        <strong>✅ CORRECT! This is a DEEPFAKE SCAM</strong>
+                        <p style="margin-top: 10px;">
+                            <strong>Why:</strong> Celebrity investment deepfakes are extremely common! Scammers use AI to create fake videos of famous people like Tom Hanks, Elon Musk, or Morgan Freeman promoting fake investments. The video quality might be good, but if a celebrity is promoting an investment opportunity you've never heard about through social media (not their verified accounts), it's almost certainly fake.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>Red flags:</strong> Random social media post (not from verified account), financial opportunity, urgency ("limited time"), and content that's unusual for that celebrity.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>What to do:</strong> Do NOT click the link. Check the celebrity's official verified social media accounts. Report the fake video to Facebook.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Exercise 3 -->
+                <div class="exercise-card">
+                    <h3 style="color: #667eea; margin-top: 0;">Exercise 3: Voice Call from Your Grandson</h3>
+                    <div class="exercise-scenario">
+                        <strong>The Situation:</strong>
+                        <p style="margin: 10px 0;">
+                            You get a phone call (voice only, no video) from your grandson's number. It sounds exactly like him. He says "Hey Grandma, my car broke down on the highway. I'm stuck and my wallet was in the car when it got towed. Can you send me $200 through Venmo so I can get an Uber home? I'm really stressed out." You talked to him just yesterday and everything seemed fine.
+                        </p>
+                        <div class="clue-list">
+                            <strong>🔍 Look for these clues:</strong>
+                            <ul>
+                                <li>What's being requested?</li>
+                                <li>Can you verify it's really him?</li>
+                                <li>Does the situation make sense?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-exercise="3" data-answer="real">REAL</button>
+                        <button class="choice-btn" data-exercise="3" data-answer="fake">AI VOICE SCAM</button>
+                    </div>
+                    <div class="explanation" id="explanation3">
+                        <strong>🤔 This could be REAL or a SCAM - You need to VERIFY!</strong>
+                        <p style="margin-top: 10px;">
+                            <strong>Why this is tricky:</strong> It's calling from his actual number (which can be faked/"spoofed"), it sounds like him (AI can clone voices), and it's a plausible emergency. BUT it could also be your real grandson in trouble!
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>What to do:</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li><strong>Say:</strong> "I'll call you right back in 2 minutes" and hang up</li>
+                            <li><strong>Call him back</strong> on the same number - if it's a scammer, they won't answer</li>
+                            <li><strong>Ask your family code word</strong> if you have one</li>
+                            <li><strong>Ask a question only he would know:</strong> "What did we have for dinner last time you visited?"</li>
+                            <li><strong>Call another family member</strong> to verify</li>
+                        </ul>
+                        <p style="margin-top: 10px;">
+                            <strong>Never</strong> send money without verification, even if it sounds real and urgent. A real emergency can wait 5 minutes for you to verify!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Exercise 4 -->
+                <div class="exercise-card">
+                    <h3 style="color: #667eea; margin-top: 0;">Exercise 4: Video Message from Your Doctor's Office</h3>
+                    <div class="exercise-scenario">
+                        <strong>The Situation:</strong>
+                        <p style="margin: 10px 0;">
+                            You receive an email from what appears to be your doctor's office email address. It contains a video message from your doctor reminding you about your upcoming appointment next Tuesday at 2 PM. The doctor looks normal, mentions the appointment you actually have scheduled, and reminds you to bring your insurance card. There's no request for money or personal information.
+                        </p>
+                        <div class="clue-list">
+                            <strong>🔍 Look for these clues:</strong>
+                            <ul>
+                                <li>Is there a financial request?</li>
+                                <li>Does the information match your records?</li>
+                                <li>Is this typical for your doctor's office?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-exercise="4" data-answer="real">LIKELY REAL</button>
+                        <button class="choice-btn" data-exercise="4" data-answer="fake">DEEPFAKE SCAM</button>
+                    </div>
+                    <div class="explanation" id="explanation4">
+                        <strong>✅ This is LIKELY REAL - but always verify!</strong>
+                        <p style="margin-top: 10px;">
+                            <strong>Why this seems legitimate:</strong> Many doctor's offices are now using video appointment reminders. This message has accurate information (your real appointment), doesn't ask for money or sensitive information, and comes from what appears to be the office's email.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>However, stay cautious:</strong> If you want to be absolutely sure, call your doctor's office using the number you have saved (not one from the email) and ask if they sent it. Email addresses can be spoofed to look real.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>Key point:</strong> Not every video is a deepfake! Legitimate organizations do use video messages. The difference is they won't ask for passwords, payments, or urgent action.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Exercise 5 -->
+                <div class="exercise-card">
+                    <h3 style="color: #667eea; margin-top: 0;">Exercise 5: Video Call About Computer Virus</h3>
+                    <div class="exercise-scenario">
+                        <strong>The Situation:</strong>
+                        <p style="margin: 10px 0;">
+                            A pop-up appears on your computer screen, and then you receive a video call on your computer. The person on the video is wearing a Microsoft uniform and says they've detected a serious virus on your computer. They say they need to remote access your computer to fix it immediately. They look professional and the video quality is good, though you notice their face looks slightly blurry around the edges and their blinking seems odd.
+                        </p>
+                        <div class="clue-list">
+                            <strong>🔍 Look for these clues:</strong>
+                            <ul>
+                                <li>How did this call start?</li>
+                                <li>What are they asking for?</li>
+                                <li>Are there visual oddities?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-exercise="5" data-answer="real">REAL</button>
+                        <button class="choice-btn" data-exercise="5" data-answer="fake">DEEPFAKE SCAM</button>
+                    </div>
+                    <div class="explanation" id="explanation5">
+                        <strong>✅ CORRECT! This is a DEEPFAKE SCAM</strong>
+                        <p style="margin-top: 10px;">
+                            <strong>Why:</strong> This is a classic tech support scam now using deepfake technology! Microsoft, Apple, and other tech companies NEVER call you unsolicited, and they NEVER use pop-ups to contact you about viruses. The blurry edges and odd blinking are common signs of deepfake video.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>Major red flags:</strong>
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Unsolicited contact about computer problems</li>
+                            <li>Pop-up that led to a call (this is automated scam software)</li>
+                            <li>Request for remote access to your computer</li>
+                            <li>Visual anomalies (blurry face, odd blinking)</li>
+                        </ul>
+                        <p style="margin-top: 10px;">
+                            <strong>What to do:</strong> Close everything immediately. Do NOT give them access to your computer. Restart your computer if needed. Run your own legitimate antivirus if you have one installed.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Exercise 6 -->
+                <div class="exercise-card">
+                    <h3 style="color: #667eea; margin-top: 0;">Exercise 6: Voice Call from the Police</h3>
+                    <div class="exercise-scenario">
+                        <strong>The Situation:</strong>
+                        <p style="margin: 10px 0;">
+                            You receive a phone call from someone who says they're Officer Johnson from your local police department. They sound professional and official. They say there's a warrant for your arrest for missing jury duty, but you can clear it up right now by paying a $500 fine over the phone with a credit card. They say if you don't pay immediately, officers will come to arrest you within the hour. They sound very convincing and you're scared.
+                        </p>
+                        <div class="clue-list">
+                            <strong>🔍 Look for these clues:</strong>
+                            <ul>
+                                <li>Do police handle things this way?</li>
+                                <li>What are the pressure tactics?</li>
+                                <li>What payment method is requested?</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-exercise="6" data-answer="real">REAL</button>
+                        <button class="choice-btn" data-exercise="6" data-answer="fake">AI VOICE SCAM</button>
+                    </div>
+                    <div class="explanation" id="explanation6">
+                        <strong>✅ CORRECT! This is an AI VOICE SCAM (possibly using voice synthesis)</strong>
+                        <p style="margin-top: 10px;">
+                            <strong>Why:</strong> This is 100% a scam! Real police and courts do NOT:
+                        </p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Call you about warrants</li>
+                            <li>Demand immediate payment over the phone</li>
+                            <li>Accept credit cards for fines</li>
+                            <li>Threaten immediate arrest if you don't pay right now</li>
+                            <li>Handle legal matters entirely by phone</li>
+                        </ul>
+                        <p style="margin-top: 10px;">
+                            <strong>The reality:</strong> If you missed jury duty or had a warrant, you would receive official written notices in the mail first. You would have time to respond and handle it properly through the courts.
+                        </p>
+                        <p style="margin-top: 10px;">
+                            <strong>What to do:</strong> Hang up immediately. If you're worried it might be real, call your local police department using a number you look up yourself (not a number they give you) and ask them directly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tip-box" style="margin-top: 30px;">
+                    <h3 style="margin-top: 0;">🎯 Key Takeaways from These Exercises:</h3>
+                    <ul class="checklist">
+                        <li><strong>Requests for money, passwords, or remote access = RED FLAG</strong></li>
+                        <li><strong>Pressure and urgency = Scammer tactic</strong></li>
+                        <li><strong>Always verify through independent channels</strong></li>
+                        <li><strong>Watch for visual oddities in videos (blurriness, odd movements)</strong></li>
+                        <li><strong>Just because it looks or sounds real doesn't mean it is</strong></li>
+                        <li><strong>When in doubt, hang up and verify independently</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 5: Email & Text Scams -->
+            <div class="slide">
+                <h2>📧 Modern Email & Text Scams</h2>
+
+                <div class="scenario">
+                    <div class="scenario-title">📨 Real-Life Scenario: The Amazon Alert</div>
+                    <p style="margin: 15px 0; line-height: 1.8;">
+                        You get a text: "Amazon Alert: Unusual activity detected. Someone tried to purchase a $799 iPhone using your account. If this wasn't you, click here immediately to cancel: amazon-security-check.com"
+                    </p>
+                    <p><strong>It looks official, but it's a scam. The link leads to a fake website that steals your information.</strong></p>
+                </div>
+
+                <h3>Common Email/Text Scams:</h3>
+                <ul>
+                    <li><strong>Package Delivery Scams:</strong> "Your package can't be delivered, click here to reschedule"</li>
+                    <li><strong>Account Verification:</strong> "Your account will be closed unless you verify now"</li>
+                    <li><strong>Prize Notifications:</strong> "You've won! Claim your prize by clicking here"</li>
+                    <li><strong>IRS/Tax Scams:</strong> "You owe back taxes, pay immediately to avoid arrest"</li>
+                    <li><strong>Tech Support Scams:</strong> "Your computer has a virus, call this number"</li>
+                </ul>
+
+                <h3>🚩 Red Flags in Messages:</h3>
+                <ul class="red-flag">
+                    <li>Urgent language: "Act now!" "Immediate action required!" "Account will be closed!"</li>
+                    <li>Threats of consequences: arrest, account closure, missed delivery</li>
+                    <li>Requests to click links or download attachments</li>
+                    <li>Asking for personal information via email or text</li>
+                    <li>Spelling or grammar mistakes</li>
+                    <li>Sender email doesn't match the company (amazonn.com instead of amazon.com)</li>
+                    <li>Generic greetings like "Dear Customer" instead of your name</li>
+                </ul>
+
+                <h3>✅ Safe Practices:</h3>
+                <div class="tip-box">
+                    <ul class="checklist">
+                        <li><strong>Never Click Links in Unexpected Messages:</strong> Go directly to the company's website by typing it yourself.</li>
+                        <li><strong>Hover Over Links (on computer):</strong> Before clicking, hover your mouse to see where it really goes.</li>
+                        <li><strong>Contact Companies Directly:</strong> Use phone numbers from their official website, not from the email or text.</li>
+                        <li><strong>Don't Trust Caller ID:</strong> Numbers can be faked. Always verify independently.</li>
+                        <li><strong>Delete Suspicious Messages:</strong> When in doubt, delete it.</li>
+                    </ul>
+                </div>
+
+                <div class="danger-box">
+                    <strong>Remember:</strong> The IRS, Social Security Administration, and your bank will NEVER call, text, or email asking for passwords, PINs, or full account numbers. They will NEVER threaten immediate arrest or demand payment via gift cards.
+                </div>
+            </div>
+
+            <!-- Slide 5: Password Safety -->
+            <div class="slide">
+                <h2>🔐 Password Safety & Account Security</h2>
+
+                <div class="key-point">
+                    Strong passwords are your first line of defense. Weak passwords are like leaving your front door unlocked with a "Welcome!" sign.
+                </div>
+
+                <h3>❌ Common Password Mistakes:</h3>
+                <ul>
+                    <li>Using the same password for multiple accounts</li>
+                    <li>Simple passwords like "password123" or "qwerty"</li>
+                    <li>Using birthdays, pet names, or other easy-to-guess information</li>
+                    <li>Writing passwords on sticky notes near your computer</li>
+                    <li>Sharing passwords with others</li>
+                </ul>
+
+                <h3>✅ Creating Strong Passwords:</h3>
+                <div class="tip-box">
+                    <ul class="checklist">
+                        <li><strong>Use Passphrases:</strong> Instead of "Password1", try "BlueCoffee!Morning@2024" - easier to remember, harder to crack</li>
+                        <li><strong>Make Them Long:</strong> At least 12-16 characters</li>
+                        <li><strong>Mix It Up:</strong> Combine uppercase, lowercase, numbers, and symbols</li>
+                        <li><strong>Unique for Each Account:</strong> Never reuse passwords, especially for banking or email</li>
+                        <li><strong>Consider a Password Manager:</strong> Apps like LastPass or 1Password safely store your passwords</li>
+                    </ul>
+                </div>
+
+                <h3>Two-Factor Authentication (2FA):</h3>
+                <div class="key-point">
+                    <strong>What It Is:</strong> A second security check after your password. Even if someone steals your password, they can't get into your account without the second factor.
+                </div>
+
+                <p style="font-size: 1.1em; margin: 20px 0;">
+                    <strong>Example:</strong> You enter your password, then you receive a text message with a 6-digit code that you also need to enter. Or you might use an app on your phone that generates codes.
+                </p>
+
+                <div class="tip-box">
+                    <strong>Enable 2FA on:</strong>
+                    <ul>
+                        <li>Email accounts (Gmail, Yahoo, etc.)</li>
+                        <li>Banking and financial accounts</li>
+                        <li>Social media accounts</li>
+                        <li>Shopping accounts (Amazon, etc.)</li>
+                        <li>Any account with sensitive information</li>
+                    </ul>
+                </div>
+
+                <h3>What to Do If You're Hacked:</h3>
+                <ol style="font-size: 1.1em;">
+                    <li><strong>Change your password immediately</strong> on the affected account</li>
+                    <li><strong>Change passwords on other accounts</strong> if you used the same password</li>
+                    <li><strong>Enable two-factor authentication</strong></li>
+                    <li><strong>Check for unauthorized transactions</strong> if it's a financial account</li>
+                    <li><strong>Alert your bank</strong> if financial information was compromised</li>
+                    <li><strong>Report it</strong> to the company and consider reporting to the FTC at reportfraud.ftc.gov</li>
+                </ol>
+            </div>
+
+            <!-- Slide 6: Quick Quiz -->
+            <div class="slide">
+                <h2>🎯 Quick Knowledge Check</h2>
+                <p style="font-size: 1.1em; margin-bottom: 30px;">Let's test what we've learned! Click on each scenario to see if you can spot the scam.</p>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario 1: The Urgent Call</div>
+                    <p style="margin: 15px 0;">
+                        You receive a call that sounds like your daughter. She says she's been arrested and needs $2,000 for bail immediately. She says "Don't call Dad, he'll be so angry. Just send money to this number now."
+                    </p>
+                    <button class="interactive-btn" data-answer="1">What should you do?</button>
+                    <div class="answer-box" id="answer1">
+                        <strong>✅ CORRECT ACTION:</strong> Hang up immediately and call your daughter on her regular phone number. This is a classic AI voice scam. Real emergencies don't require secrecy from family members, and legitimate bail isn't paid via wire transfer to random numbers.
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario 2: The Email Alert</div>
+                    <p style="margin: 15px 0;">
+                        You get an email from "Netflix" saying your payment failed and your account will be suspended. It asks you to click a link to update your credit card information.
+                    </p>
+                    <button class="interactive-btn" data-answer="2">What should you do?</button>
+                    <div class="answer-box" id="answer2">
+                        <strong>✅ CORRECT ACTION:</strong> Don't click the link! Instead, open a new browser window, type "netflix.com" yourself, and log into your account to check. If there's really an issue, you'll see it there. The email is likely a phishing scam.
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario 3: The Video Call</div>
+                    <p style="margin: 15px 0;">
+                        You receive a video call from someone who looks like a police officer. They say you missed jury duty and must pay a fine immediately or face arrest. They ask for your credit card number.
+                    </p>
+                    <button class="interactive-btn" data-answer="3">What should you do?</button>
+                    <div class="answer-box" id="answer3">
+                        <strong>✅ CORRECT ACTION:</strong> Hang up! This is a scam, possibly using deepfake video. Real police and courts NEVER ask for payment over the phone, especially not immediately. They send official letters. Call your local police department (using a number you look up yourself) to report the scam.
+                    </div>
+                </div>
+
+                <div class="scenario">
+                    <div class="scenario-title">Scenario 4: The Tech Support</div>
+                    <p style="margin: 15px 0;">
+                        A pop-up appears on your computer saying "VIRUS DETECTED! Your computer is infected! Call this number immediately for Microsoft Support."
+                    </p>
+                    <button class="interactive-btn" data-answer="4">What should you do?</button>
+                    <div class="answer-box" id="answer4">
+                        <strong>✅ CORRECT ACTION:</strong> Close the window without calling! Microsoft and Apple never use pop-ups to alert you about viruses. This is a fake alert trying to scare you into calling scammers who will ask for remote access to your computer or payment for fake "repairs." Just close the browser or restart your computer.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Action Plan -->
+            <div class="slide">
+                <h2>📋 Your Action Plan: Steps to Take Today</h2>
+
+                <div class="tip-box">
+                    <h3 style="margin-top: 0;">Immediate Actions (This Week):</h3>
+                    <ul class="checklist">
+                        <li><strong>Create a Family Code Word:</strong> Share a secret word with family members to verify identity in emergencies</li>
+                        <li><strong>Review Your Passwords:</strong> Change any passwords you've used on multiple accounts</li>
+                        <li><strong>Enable Two-Factor Authentication:</strong> Start with your email and bank accounts</li>
+                        <li><strong>Update Phone Contacts:</strong> Make sure you have trusted numbers saved for family, bank, and important services</li>
+                        <li><strong>Delete Suspicious Messages:</strong> Clear out any questionable texts or emails</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h3 style="margin-top: 0;">Ongoing Habits:</h3>
+                    <ul>
+                        <li><strong>Pause Before Clicking:</strong> Take 10 seconds to think before clicking any link</li>
+                        <li><strong>Verify, Verify, Verify:</strong> When in doubt, contact people directly using known numbers</li>
+                        <li><strong>Never Rush:</strong> Scammers use urgency as a weapon. Take your time</li>
+                        <li><strong>Ask for Help:</strong> Talk to trusted family members or friends if something seems off</li>
+                        <li><strong>Stay Informed:</strong> Scams evolve, so keep learning about new threats</li>
+                    </ul>
+                </div>
+
+                <h3>The Golden Rules:</h3>
+                <div class="key-point" style="font-size: 1.2em;">
+                    <ol style="line-height: 2;">
+                        <li><strong>If it sounds too good to be true, it is</strong></li>
+                        <li><strong>Legitimate organizations never demand immediate payment</strong></li>
+                        <li><strong>Never give out passwords, PINs, or full account numbers</strong></li>
+                        <li><strong>Trust your instincts - if something feels wrong, it probably is</strong></li>
+                        <li><strong>It's okay to say no, hang up, or delete</strong></li>
+                    </ol>
+                </div>
+
+                <h3>Resources & Help:</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <p><strong>Report Scams:</strong></p>
+                    <ul>
+                        <li>Federal Trade Commission: <strong>reportfraud.ftc.gov</strong> or call <strong>1-877-FTC-HELP</strong></li>
+                        <li>FBI Internet Crime Complaint Center: <strong>ic3.gov</strong></li>
+                        <li>Your local police department for immediate threats</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Get Help:</strong></p>
+                    <ul>
+                        <li>AARP Fraud Watch Network: <strong>1-877-908-3360</strong></li>
+                        <li>ElderCare Locator: <strong>1-800-677-1116</strong></li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Remember:</strong> You are not alone! These scams are sophisticated and designed to fool people. Being aware and cautious makes you much safer. Don't be embarrassed to ask questions or verify information - that's being smart, not paranoid!
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Questions? Let's discuss! Remember: There's no such thing as a silly question when it comes to your safety.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Stay safe, stay informed, and stay connected with loved ones!</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const navBtns = document.querySelectorAll('.nav-btn');
+
+        // Function to show specific slide
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            navBtns[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add('active');
+            navBtns[currentSlide].classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add click handlers to navigation buttons
+        navBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const slideIndex = parseInt(this.getAttribute('data-slide'));
+                showSlide(slideIndex);
+            });
+        });
+
+        // Add click handlers to quiz answer buttons
+        const answerButtons = document.querySelectorAll('.interactive-btn[data-answer]');
+        answerButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const answerNum = this.getAttribute('data-answer');
+                const answerBox = document.getElementById('answer' + answerNum);
+                
+                if (answerBox.style.display === 'none' || answerBox.style.display === '') {
+                    answerBox.style.display = 'block';
+                    this.textContent = 'Hide Answer';
+                } else {
+                    answerBox.style.display = 'none';
+                    this.textContent = 'What should you do?';
+                }
+            });
+        });
+
+        // Add click handlers to deepfake exercise buttons
+        const exerciseButtons = document.querySelectorAll('.choice-btn');
+        exerciseButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const exerciseNum = this.getAttribute('data-exercise');
+                const userAnswer = this.getAttribute('data-answer');
+                const explanation = document.getElementById('explanation' + exerciseNum);
+                const allButtons = document.querySelectorAll(`[data-exercise="${exerciseNum}"]`);
+                
+                // For exercises 1, 2, 5, 6 - "fake" is correct
+                // For exercise 3 - both answers show same explanation (need to verify)
+                // For exercise 4 - "real" is correct
+                
+                let isCorrect = false;
+                if ((exerciseNum === '1' || exerciseNum === '2' || exerciseNum === '5' || exerciseNum === '6') && userAnswer === 'fake') {
+                    isCorrect = true;
+                } else if (exerciseNum === '4' && userAnswer === 'real') {
+                    isCorrect = true;
+                } else if (exerciseNum === '3') {
+                    // Exercise 3 shows same explanation for both answers
+                    isCorrect = true;
+                }
+                
+                // Mark buttons
+                allButtons.forEach(button => {
+                    button.style.pointerEvents = 'none';
+                    if (button === this) {
+                        if (isCorrect || exerciseNum === '3') {
+                            button.classList.add('correct');
+                        } else {
+                            button.classList.add('incorrect');
+                        }
+                    }
+                });
+                
+                // Show explanation
+                if (isCorrect || exerciseNum === '3') {
+                    explanation.classList.add('correct');
+                } else {
+                    explanation.classList.add('incorrect');
+                    explanation.innerHTML = '<strong>❌ Not quite!</strong><p style="margin-top: 10px;">This is actually a scam. Read the correct answer below:</p>' + explanation.innerHTML;
+                }
+                
+                explanation.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
